@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %} Liste des sondages  {% endblock %}
+{% block currentPageTitle %} Liste des sondages {% endblock %}
+{% block content %}  
+<p>
+  <h1> 
+    Liste des sondages
+  </h1>
+  <div>
+
+    <table>
+      <thead> <th>Sondeur</th><th>Titre du sondage</th><th>Nombre de questions</th><th>Nombre de réponses</th></thead>
+      <tbody>
+      {% for poll in polls %}
+      <tr class="{% cycle "ligne1" "ligne2" as ligne %}"  onclick="detailpollliste('/poll/answer?poll={{poll.id}}');"> <td>{{poll.pollster.fullname}}</td><td>{{poll.title}}</td><td>{{poll.questions_number}}</td><td>{{poll.answerCount}}</td></tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+
+  </div>
+
+</p>
+{% endblock %}
+

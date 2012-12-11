@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr">
+<head>
+	{% block head %}
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" href="/static/base.css"/> 
+	 <script type="text/javascript" src="/static/base.js"></script>
+ 
+
+
+	<title>
+{% block title %}{% endblock %} - Gestionnaire électronique de sondages, INSA de Rouen
+		
+	</title>
+	{% endblock %}
+</head>
+<body>
+
+  
+	<div id="header">
+	{% block header %} 
+		<div id="headerMain">
+			<h1 id="headerLogoINSA">
+				<a href="http://www.insa-rouen.fr">
+					<span>
+						INSA de Rouen
+					</span>
+				</a>
+			</h1>
+			<h1 id="headerTitreGeneral">
+				Gestionnaire de sondages
+			</h1>
+			<h2 id="headerTitrePage">
+				{% block currentPageTitle %}{% endblock %}
+			</h2>
+		</div>
+
+		{% if connected %}
+            <div id="headerTab">
+                <ul >
+			        <li class="headerTabNoOver">
+				        Vous êtes connecté en tant que {{fullname}}.
+			        </li>
+                </ul>
+            </div>
+        {% endif %}
+	{% endblock %}
+	</div>	
+    <div id="main">
+
+		<div id="menu">
+			{% block headerTabs %}
+			<ul>
+				<li class={% block indexHeaderTabElement %}"menuElement"{% endblock %} onclick="window.location='/'">
+				    <a href="/">
+						Accueil
+				    </a>
+				</li>
+				{% block additionnalHeaderTabs %}
+				{% endblock %}
+
+                                {%for i,t in tabs.items%}
+                                  {%for name, target in t.items%}
+				<li class="menuElement" onclick="window.location='{{target}}'">
+                                  <a href="{{target}}">
+                                    {{name}}
+                                  </a>
+				</li>
+                                  {%endfor%}
+                                {%endfor%}
+
+
+				<li class={% block helpHeaderTabElement %}"menuElement"{% endblock %} onclick="window.location='/aide'">
+				    <a href="/aide">
+						Aide
+				    </a>
+				</li>
+				{% if not connected %}
+					<li class={% block connectHeaderTabElement %}"menuElement"{% endblock %} onclick="window.location='https://cas.insa-rouen.fr/cas/login?service={{urlReturnCAS}}'">
+					<a href="https://cas.insa-rouen.fr/cas/login?service={{urlReturnCAS}}">
+						    Se connecter
+					</a>
+					</li>
+				{% else %}
+				
+						<li class={% block disconnectHeaderTabElement %}"menuElement"{% endblock %} onclick="window.location='/disconnect'">
+	                    <a href="/disconnect">
+							Se déconnecter
+						</a>		
+						</li> 
+
+				{% endif %}
+			</ul>
+			{% endblock %}
+		</div>
+                
+        <div id="content">
+        {% block content %} 
+	        <p> Contenu de la page (Vide!).</p>
+
+        {% endblock %}
+        </div>
+    </div>
+    <div id="footer">
+    {% block footer %} 
+	    <ul id="footerLinks">
+		    {% block footerLinks %} 
+		    <a href="http://www.insa-rouen.fr">
+			    <li class="footerLinkElement">
+				    INSA
+			    </li>
+		    </a>	
+	            {% now "l j F Y H:i"%}
+	            {% endblock %} 
+	    </ul>
+    {% endblock %} 
+    </div>
+</body>
+</html>

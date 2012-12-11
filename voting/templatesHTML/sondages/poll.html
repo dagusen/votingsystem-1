@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %} Sondage {{poll.title}} {% endblock %}
+{% block currentPageTitle %} Sondage {{poll.title}} {% endblock %}
+
+{% block content %}  
+<p>
+  <div class="formulaireTable">
+
+    <table>
+
+
+      <tr><th>Titre :</th><td>{{poll.title}}</td></tr>
+      <tr><th>Auteur :</th><td>{{poll.pollster.fullname}}</td></tr>
+      <tr><th>Date de fin :</th><td>{{poll.get_endDate_display}}</td></tr>
+      <tr><th>Anonyme :</th><td>{{poll.get_anonymous_display}}</td></tr>
+      <tr><th>Nombre de réponses :</th><td>{{poll.answerCount}}</td></tr>
+    </table>
+
+    <h2>Les questions</h2>
+
+    {% for q in lesQuestions %}
+
+    <table>
+      <tr onclick="if(document.getElementById('div{{q.id}}').style.display == '') document.getElementById('div{{q.id}}').style.display = 'none'; else document.getElementById('div{{q.id}}').style.display = '';" ><th style="text-align: left;">+ {{q.text}} ?</th></tr>
+    </table>
+
+    <div id="div{{q.id}}" style="display:none;">
+      <table>
+        {%if q.textualquestion%}
+        {%for a in q.answer.all%}
+        <tr><td colspan="2">
+            {{a.display}}&nbsp;
+        </td></tr>
+        {%endfor%}
+        {%endif%}
+        {%if q.mcquestion%}
+        {%for c,r in q.answer%}
+        <tr><th style="width:80%">
+            {{c|safe}}</th><td style="text-align: center">{{r}}
+        </td></tr>
+        {%endfor%}
+        {%endif%}
+      </table>
+      
+    </div>
+    
+    {% endfor %}
+  </div>
+
+</p>
+{% endblock %}
+

@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %} Sondage {{poll.title}} {% endblock %}
+{% block currentPageTitle %} Sondage {{poll.title}} {% endblock %}
+
+{% block content %}  
+	<p>
+<div class="formulaireTable">
+
+<form action="" method="POST">
+<table>
+<tr><th>Titre :</th><td>{{poll.title}}</td></tr>
+<tr><th>Auteur :</th><td>{{poll.pollster.fullname}}</td></tr>
+<tr><th>Date de fin :</th><td>{{poll.get_endDate_display}}</td></tr>
+<tr><th>Anonyme :</th><td>{{poll.get_anonymous_display}}</td></tr>
+<tr><th>Nombre de réponses :</th><td>{{poll.answerCount}}</td></tr>
+</table>
+<h2>Les questions</h2>
+<table>
+{% for q,f in lesQuestions %}
+<tr><td>{{q.text}}</td></tr>
+
+{%if q.mcquestion %}
+<tr><td style="align:right;" >{{f.errors}}
+{% autoescape off %}
+    {{ f.choice }}
+{% endautoescape %}
+</td></tr>
+{%else%}
+<tr><td style="align:right;" >{{f.errors}}
+{{f.text}}
+</td></tr>
+{%endif%}
+
+{% endfor %}
+</table>
+<div class="button">
+<input type="submit" value="Envoyer"/>
+</div>
+</form>
+</div>
+
+	</p>
+{% endblock %}
+

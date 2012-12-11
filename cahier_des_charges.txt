@@ -1,0 +1,66 @@
+Note: (!!) non implémenté
+
+Chaque personne dans le ldap peut proposer un vote.
+
+Il y a un groupe d'administrateur qui reçoit un mail à chaque nouvelle 
+proposition de vote et qui valide ou pas la demande. En cas de refus, un commentaire
+doit pouvoir être ajouté. Il y a donc modération à la création d'un vote. (!!)
+
+La page d'accueil présente les dernières consultations publiques en cours et passées.
+
+Limitation de la consultation:
+------------------------------
+Un vote peut être:
+- complétement ouvert (toute personne peut répondre, même sans compte dans le ldap)
+- ouvert avec authentification (toute personne ayant un compte dans le ldap)
+- limité à un ou plusieurs groupes définis dans le ldap (!!)
+- limité à plusieurs utilisateurs nommés qui sont dans le ldap (!!)
+
+Une fois que l'utilisateur a voté, il peut voir les résultats en cours.
+
+Un vote peut être annonyme, on enregistre que la personne a répondu et ce qu'elle a répondu mais on ne pourra pas dire ce qu'elle a répondu.
+Par contre, on enregistre la date et l'heure de la réponse.
+
+Visibilité:
+-----------
+Un vote peut être:
+- public (tout le monde peut le voir)
+- privé (seul les personnes consultées et le créateur peuvent le voir)
+
+Type de question:
+-----------------
+- avec réponses multiples (sous forme texte, image) avec soit 1 réponse possible, soit plusieurs (pas pour plusieurs !! )
+- avec classement des réponses (!!)
+- avec réponse manuelle (un texte doit être saisi)
+
+Une réponse peut être: un texte, une image ou un fichier
+
+Un vote est limité dans le temps, il doit obligatoirement avoir une date de fin.
+
+Option d'envoi de mail: (!!)
+-----------------------
+- à la demande de création d'un vote à destination des administrateurs
+- à l'acceptation d'un vote pour prévenir le créateur
+- à l'acceptation d'un vote pour demande de consultation aux utilisateurs (si option sélectionnée par le créateur)
+- à la fin de la période de consultation pour prévenir le créateur
+
+Publication des résultats:
+--------------------------
+À la fin de la période de consultation, il n'est plus possible de voter et on peut seulement accéder aux résultats (si les 
+droits de l'utilisateur le permette). Pour chaque question, on doit avoir la donnée numérique du nombre de vote pour chaque
+réponse et ainsi qu'un graphique présentant les résultats (!! pas la partie graphique).
+
+Exemple de consultation:
+------------------------
+        - quels est le meilleur moment pour une intervention sur hometud ? (choix multiples)
+		Réponse: Lundi / Mardi / Mercredi / Jeudi / Vendredi / Samedi / Dimanche
+        - quels seront les 3 premiers du prochain grand prix truc ? (classement de 1 à 3 parmis 20 reponses possibles)
+
+En résumé:
+----------
+1- choix multiples / classement
+2- modération de la création des sondages (avec les mails)
+3- gestion des groupes
+
+(ajouter un lien pour les réponses des sondages anonymes)
+

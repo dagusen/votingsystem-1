@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %} Nouveau sondage  {% endblock %}
+{% block currentPageTitle %} Nouveau sondage {% endblock %}
+{% block indexHeaderTabElement %}"headerTabSelectedElement"{% endblock %}
+{% block content %}  
+	<p>
+		<h1> 
+                  Nouveau sondage
+		</h1>
+<div class="formulaireTable">
+<form action="{{targetForm}}" method="POST" enctype="multipart/form-data">
+<table>
+{{error}}
+
+{{pollform.as_table}}
+</table>
+{%if questionforms %}<h2>Les questions</h2>{%endif%}
+{% for q,c in questionforms %}
+<table>
+{{q.as_table}}<br/>
+{%if q.mcquestion%}
+{%for choice in c%}
+{{choice.as_table|safe}}
+{%endfor%}
+<tr><th>Ajouter un choix :</th><td collspan="2" >
+<table >
+<tr>
+<td class="buttontable" width="33%" ><input class="submitbutton" type="submit" name="buttonAddTextualChoice{{q.prefix}}" value="+ Texte"/></td>
+<td class="buttontable" width="33%" ><input class="submitbutton" type="submit" name="buttonAddImageChoice{{q.prefix}}" value="+ Image"/></td>
+<td class="buttontable" width="33%" ><input class="submitbutton" type="submit" name="buttonAddFileChoice{{q.prefix}}" value="+ Fichier"/></td>
+</tr>
+</table>
+</td></tr>
+{%endif%}
+</table>
+{% endfor %}
+
+<center>
+<div class="button">
+<input class="submitbutton" type="submit" name="buttonAddQ" value="+ question normale"/>
+<input class="submitbutton" type="submit" name="buttonAddMCQ" value="+ question à choix multiple"/>
+<input class="submitbutton" type="submit" name="button" value="envoyer"/>
+</div>
+</center>
+</form>
+</div>
+
+	</p>
+{% endblock %}
+
